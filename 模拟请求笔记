@@ -1,0 +1,27 @@
+build/dev-server.js中
+var app=express();
+var goodsData=require('../mock/goods.json')
+var router=express.Router()
+router.get("/goods",functin(req,res){
+  res.json(goodsData)
+})
+app.use(router)
+
+
+然后在对应的vue文件中请求时。
+axios.get(/goods).then((response)=>{
+  let res=response.data;
+  if(res.status=="0"){
+    this.goodsList=res.result;
+  }else{
+    this.goodsList=[];
+  }
+})
+
+//顺带说一句，开发环境下，设置代理，请求不跨域的的方法：
+config/index.js
+ProxyTable:{
+  '/goods':{
+    target:'http://localhost:3000'
+  }
+}
