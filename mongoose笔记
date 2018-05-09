@@ -1,0 +1,69 @@
+1.mongoose安装:
+cnpm i mongoose --save
+2.创建model
+模板如下：
+var mongoose=require('mongoose');
+var Schema=new mongoose.Schema({
+ "userID":String,
+ "orderList":Array,
+ "cartList":[{
+    "id":String,
+    "tel":Number,
+    "isDefault":Boolean
+ }]
+});
+module.exports=mongoose.model('Goods',Schema);
+3.创建路由
+模板如下：
+var express=require('express');
+var router=express.Router();
+var mongoose=require('mongoose');
+var Goods=require('../modes/goods');//获取goods的model
+//连接数据库
+mongoose.connect('mongodb://127.0.0.1:27017/db_demo',{useMongoClient:true});
+//如果要用登陆的方式mongodb:name:psw
+
+//监听连接成功
+mongoose.connection.on("connected",function(){
+  console.log("mongoDB connected success");
+});
+//监听连接出错
+mongoose.connection.on("error",function(){
+  console.log("mongoDB connected error");
+});
+//监听连接断开
+mongoose.connection.on("disconnected",function(){
+  console.log("mongoDB connected success");
+});
+//需要注意下，这里的路由是二级路由。一级路由的话，在外层app.js中摄者
+
+// 参数在url中时,也就是get提交的方式。以下两种方法获取参数
+// /path/:id,参数在req.params.id中
+// /path?id=xx,参数在req.query.id中
+//
+//post提交的方式。以下方法获取参数
+// 用json body 或者form 表单传参时参数在req.body中
+
+router.get('/',function(req,res,next){
+  Goods.find({},function(err,doc){
+    if(err){
+      res.json({
+        status:'1',
+        msg:err.message
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:{
+          count:doc.length,
+          list:doc
+        }
+      })
+    }
+  });
+})
+moude.exports=router;
+
+启动node XX/bin/www。
+访问http//localhost:3000/goods查看结果。
