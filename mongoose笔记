@@ -12,7 +12,9 @@ var Schema=new mongoose.Schema({
     "isDefault":Boolean
  }]
 });
-module.exports=mongoose.model('Goods',Schema);
+module.exports=mongoose.model('Good',Schema);//这里需要注意下。集合名称是goods。这里good会默认查找加了s后的名称。
+如果实际上数据库中集合名称是good，不带s的话。那么这里就要多一个参数
+module.exports=mongoose.model('Good',Schema,'good');
 3.创建路由
 模板如下：
 var express=require('express');
