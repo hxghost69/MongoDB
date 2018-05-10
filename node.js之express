@@ -1,0 +1,12 @@
+Node.js启动调试方式：
+1.通过node命令启动 node bin/www
+vscode启动
+pm2
+
+app.js中的路由是一级路由。
+router文件夹中添加的XX.js配置的路由是二级路由。
+
+app.js中设置
+app.engine('.html',ejs.__express);
+app.set('view engine', 'html');
+视图弄成html后缀的。
