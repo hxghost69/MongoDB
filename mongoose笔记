@@ -40,11 +40,11 @@ mongoose.connection.on("disconnected",function(){
 //需要注意下，这里的路由是二级路由。一级路由的话，在外层app.js中摄者
 
 // 参数在url中时,也就是get提交的方式。以下两种方法获取参数
-// /path/:id,参数在req.params.id中
+// /path/:id,参数在req.param.id中
 // /path?id=xx,参数在req.query.id中
 //
 //post提交的方式。以下方法获取参数
-// 用json body 或者form 表单传参时参数在req.body中
+// 用json body 或者form 表单传参时参数在req.body.参数。中
 
 router.get('/',function(req,res,next){
   Goods.find({},function(err,doc){
@@ -63,6 +63,12 @@ router.get('/',function(req,res,next){
         }
       })
     }
+  });
+  如果find之后还有其他操作。那就需要用exec执行最后的操作。例如：
+  let goodsModel=Goods.find(params).skip(params).limit(pageSize);
+  goodsModel.sort({'salePrice':sort});
+  goodsModel.exec({},function(err,doc){
+  
   });
 })
 moude.exports=router;
