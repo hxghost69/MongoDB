@@ -10,3 +10,5 @@ app.js中设置
 app.engine('.html',ejs.__express);
 app.set('view engine', 'html');
 视图弄成html后缀的。
+
+需要注意，要添加一个error.html。否则会报错
