@@ -1,3 +1,15 @@
+
+安装express
+npm install express --save(保存到依赖里)
+
+安装一个express生成器
+npm install express-generator -g
+
+生成一个叫myapp的express应用
+express myapp
+
+
+
 Node.js启动调试方式：
 1.通过node命令启动 node bin/www
 vscode启动
