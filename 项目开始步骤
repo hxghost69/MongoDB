@@ -1,0 +1,26 @@
+大致步骤：
+前期MongoDB安装好。
+新建一个express(server)项目。
+  新建models文件夹，添加相应模型。routes文件夹新建对应接口。
+  关于路由设置，app.js中是一级路由。二级路由在routes文件夹中添加文件设置。
+----------
+新建一个vue项目
+安装各自依赖，mongoose ，axios，vuex，mint等。
+
+1.vue init webpack projectname
+2.express install express --save
+3.npm install express-generator
+4.express XXname
+node bin/www
+
+config/index.js
+开发环境下跨域
+proxyTable: {
+      '/api':{
+        target:'http://localhost:3000',
+        changeOrigin: true, //改变源 
+        pathRewrite:{
+          '^/api':''
+        }
+      }
+    }
